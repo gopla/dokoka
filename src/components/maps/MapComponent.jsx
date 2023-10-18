@@ -1,6 +1,6 @@
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import { useEffect, useState } from 'react'
-import { Button, Stack } from '@mui/material'
+import { Box, Button, Stack, Typography } from '@mui/material'
 import { useOutletContext } from 'react-router-dom'
 import { Icon, divIcon, point } from 'leaflet'
 import assets from '../../assets'
@@ -26,13 +26,36 @@ const MapComponent = () => {
           geocode: location.geocode,
           id: location.id,
           popUp: (
-            <div>
-              <h3>{location.name}</h3>
-              <p>{location.description}</p>
+            <Stack gap={1}>
+              <Box
+                component={'img'}
+                src={location.image}
+                alt={location.name}
+                sx={{
+                  width: '100%',
+                  height: 'auto',
+                  objectFit: 'cover',
+                }}
+              />
+
+              <Typography variant='p' sx={{
+                fontSize: 24,
+                fontWeight: 700,
+              }}>
+                {location.name}
+              </Typography>
+
+              <Typography variant='p' sx={{
+                whiteSpace: 'pre-line',
+              }}>
+                {location.description}
+              </Typography>
+
               <a href={location.googleMapsLink} target="_blank">
                 Open in Google Maps
               </a>
-            </div>
+            </Stack>
+
           ),
         },
       ])
